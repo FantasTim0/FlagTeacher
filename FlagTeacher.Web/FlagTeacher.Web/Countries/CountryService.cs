@@ -13,6 +13,8 @@ namespace FlagTeacher.Web.Countries;
 public class CountryService(HttpClient http, IMemoryCache cache, IOptions<RestCountriesOptions> options)
 {
     private const int PageSize = 100;
+    private static readonly StringComparer German = StringComparer.Create(new System.Globalization.CultureInfo("de-DE"), ignoreCase: true);
+    private const string GermanLanguageCode = "deu";
     private static readonly TimeSpan CacheDuration = TimeSpan.FromDays(1);
 
     public async Task<IReadOnlyList<Country>> GetCountriesAsync(CancellationToken ct)
@@ -33,7 +35,7 @@ public class CountryService(HttpClient http, IMemoryCache cache, IOptions<RestCo
         do
         {
             using var request = new HttpRequestMessage(HttpMethod.Get,
-                $"?response_fields=names.common,codes.alpha_2,flag.url_svg&limit={PageSize}&offset={offset}");
+                $"?response_fields=names.common,names.translations,codes.alpha_2,flag.url_svg&limit={PageSize}&offset={offset}");
             var apiKey = options.Value.ApiKey;
             if (!string.IsNullOrWhiteSpace(apiKey))
             {
@@ -47,14 +49,19 @@ public class CountryService(HttpClient http, IMemoryCache cache, IOptions<RestCo
             var objects = page?.Data?.Objects ?? [];
             result.AddRange(objects
                 .Where(c => !string.IsNullOrWhiteSpace(c.Flag?.UrlSvg) && !string.IsNullOrWhiteSpace(c.Names?.Common))
-                .Select(c => new Country(c.Codes?.Alpha2 ?? c.Names!.Common, c.Names!.Common, c.Flag!.UrlSvg!)));
+                .Select(c =>
+                {
+                    var name = c.Names!.Translations?.GetValueOrDefault(GermanLanguageCode)?.Common;
+                    name = string.IsNullOrWhiteSpace(name) ? c.Names.Common : name;
+                    return new Country(c.Codes?.Alpha2 ?? c.Names.Common, name, c.Flag!.UrlSvg!);
+                }));
 
             offset += objects.Count;
             more = objects.Count > 0 && page?.Data?.Meta?.More == true;
         } while (more);
 
         return result
-            .OrderBy(c => c.Name, StringComparer.CurrentCultureIgnoreCase)
+            .OrderBy(c => c.Name, German)
             .ToList();
     }
 
@@ -71,7 +78,11 @@ public class CountryService(HttpClient http, IMemoryCache cache, IOptions<RestCo
         [property: JsonPropertyName("codes")] RestCodes? Codes,
         [property: JsonPropertyName("flag")] RestFlag? Flag);
 
-    private record RestNames([property: JsonPropertyName("common")] string Common);
+    private record RestNames(
+        [property: JsonPropertyName("common")] string Common,
+        [property: JsonPropertyName("translations")] Dictionary<string, RestTranslation>? Translations);
+
+    private record RestTranslation([property: JsonPropertyName("common")] string? Common);
 
     private record RestCodes([property: JsonPropertyName("alpha_2")] string? Alpha2);
 
