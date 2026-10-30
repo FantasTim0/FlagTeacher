@@ -12,17 +12,31 @@ const styles = {
 let map;
 let dotNet;
 let layers = new Map();
+let home = new Map();
 let marks = new Map();
 let selected = null;
 let locked = false;
 
 function restyle(code) {
-    const layer = layers.get(code);
     const mark = marks.get(code) ?? (code === selected ? "selected" : null);
-    layer.setStyle({ ...styles.base, ...(mark ? styles[mark] : {}) });
-    if (mark) {
-        layer.bringToFront();
+    for (const layer of layers.get(code)) {
+        layer.setStyle({ ...styles.base, ...(mark ? styles[mark] : {}) });
+        if (mark) {
+            layer.bringToFront();
+        }
     }
+}
+
+// Vector layers are not repeated across world copies, so each copy gets its own shifted layer.
+function shifted(data, offset) {
+    const shift = (c) => (typeof c[0] === "number" ? [c[0] + offset, c[1]] : c.map(shift));
+    return {
+        ...data,
+        features: data.features.map((f) => ({
+            ...f,
+            geometry: { ...f.geometry, coordinates: shift(f.geometry.coordinates) },
+        })),
+    };
 }
 
 export async function init(element, reference, shapesUrl) {
@@ -31,43 +45,48 @@ export async function init(element, reference, shapesUrl) {
         preferCanvas: true,
         minZoom: 1,
         maxZoom: 8,
-        maxBounds: [[-85, -180], [85, 180]],
+        maxBounds: [[-85, -540], [85, 540]],
         maxBoundsViscosity: 1,
     }).setView([20, 0], 2);
-    L.tileLayer(tileUrl, { attribution, subdomains: "abcd", noWrap: true, maxZoom: 8 }).addTo(map);
+    L.tileLayer(tileUrl, { attribution, subdomains: "abcd", maxZoom: 8 }).addTo(map);
 
     const data = await (await fetch(shapesUrl)).json();
-    L.geoJSON(data, {
-        style: () => styles.base,
-        onEachFeature: (feature, layer) => {
-            const code = feature.properties.code;
-            layers.set(code, layer);
-            layer.on("click", () => {
-                if (locked) {
-                    return;
+    for (const offset of [-360, 0, 360]) {
+        L.geoJSON(shifted(data, offset), {
+            style: () => styles.base,
+            onEachFeature: (feature, layer) => {
+                const code = feature.properties.code;
+                layers.set(code, [...(layers.get(code) ?? []), layer]);
+                if (offset === 0) {
+                    home.set(code, layer);
                 }
-                const previous = selected;
-                selected = code === selected ? null : code;
-                if (previous) {
-                    restyle(previous);
-                }
-                if (selected) {
-                    restyle(selected);
-                }
-                dotNet.invokeMethodAsync("OnCountryClicked", selected);
-            });
-            layer.on("mouseover", () => {
-                if (!locked && code !== selected) {
-                    layer.setStyle(styles.hover);
-                }
-            });
-            layer.on("mouseout", () => {
-                if (!locked) {
-                    restyle(code);
-                }
-            });
-        },
-    }).addTo(map);
+                layer.on("click", () => {
+                    if (locked) {
+                        return;
+                    }
+                    const previous = selected;
+                    selected = code === selected ? null : code;
+                    if (previous) {
+                        restyle(previous);
+                    }
+                    if (selected) {
+                        restyle(selected);
+                    }
+                    dotNet.invokeMethodAsync("OnCountryClicked", selected);
+                });
+                layer.on("mouseover", () => {
+                    if (!locked && code !== selected) {
+                        layers.get(code).forEach((l) => l.setStyle(styles.hover));
+                    }
+                });
+                layer.on("mouseout", () => {
+                    if (!locked) {
+                        restyle(code);
+                    }
+                });
+            },
+        }).addTo(map);
+    }
 
     return [...layers.keys()];
 }
@@ -88,13 +107,14 @@ export function reveal(correct, picked) {
     }
     marks.set(correct, "correct");
     layers.forEach((_, code) => restyle(code));
-    map.fitBounds(layers.get(correct).getBounds(), { maxZoom: 5, padding: [20, 20] });
+    map.fitBounds(home.get(correct).getBounds(), { maxZoom: 5, padding: [20, 20] });
 }
 
 export function destroy() {
     map?.remove();
     map = null;
     layers = new Map();
+    home = new Map();
     marks = new Map();
     selected = null;
     locked = false;
