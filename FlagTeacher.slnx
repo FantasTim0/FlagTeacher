@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="FlagTeacher.Web/FlagTeacher.Web.Client/FlagTeacher.Web.Client.csproj" />
+  <Project Path="FlagTeacher.Web/FlagTeacher.Web/FlagTeacher.Web.csproj" />
+</Solution>
