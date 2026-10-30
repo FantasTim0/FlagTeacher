@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Flag Teacher</title>
     <base href="/"/>
-    <script src="@Assets["theme.js"]"></script>
-    <ResourcePreloader/>
-    <link rel="stylesheet" href="@Assets["lib/leaflet/leaflet.css"]"/>
-    <link rel="stylesheet" href="@Assets["app.css"]"/>
-    <link rel="stylesheet" href="@Assets["FlagTeacher.Web.styles.css"]"/>
-    <ImportMap/>
-    <HeadOutlet/>
+    <script src="theme.js"></script>
+    <link rel="preload" id="webassembly"/>
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css"/>
+    <link rel="stylesheet" href="app.css"/>
+    <link rel="stylesheet" href="FlagTeacher.Web.Client.styles.css"/>
+    <script type="importmap"></script>
 </head>
 
 <body>
@@ -24,9 +24,12 @@
         <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>
     </svg>
 </button>
-<Routes/>
-<script src="@Assets["lib/leaflet/leaflet.js"]"></script>
-<script src="@Assets["_framework/blazor.web.js"]"></script>
+<div id="app">
+    <p class="loading">Lädt …</p>
+</div>
+
+<script src="lib/leaflet/leaflet.js"></script>
+<script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
 </body>
 
 </html>

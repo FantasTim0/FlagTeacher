@@ -1,5 +1,4 @@
 @page "/"
-@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
 @using FlagTeacher.Web.Client.Components
 @using FlagTeacher.Web.Client.Models
 @inject HttpClient Http
@@ -123,14 +122,14 @@
     {
         try
         {
-            countries = await Http.GetFromJsonAsync<List<Country>>("api/countries") ?? [];
+            countries = await Http.GetFromJsonAsync<List<Country>>("data/countries.json") ?? [];
             if (countries.Count == 0)
             {
                 loadError = "Keine Länder verfügbar.";
                 return;
             }
         }
-        catch (HttpRequestException)
+        catch (Exception ex) when (ex is HttpRequestException or System.Text.Json.JsonException)
         {
             loadError = "Die Länderliste konnte nicht geladen werden.";
         }
