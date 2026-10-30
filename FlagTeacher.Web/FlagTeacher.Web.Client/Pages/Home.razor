@@ -98,6 +98,8 @@
     private bool nameCorrect;
     private bool mapCorrect;
 
+    private Country? PickedOnMap => countries.FirstOrDefault(c => c.Code == mapSelected);
+
     private bool CanGuess => SelectedCountry is not null && mapSelected is not null;
 
     private string WrongMessage => (nameCorrect, mapCorrect) switch
@@ -248,7 +250,7 @@
             state = GameState.Correct;
             correctCount++;
             StateHasChanged();
-            await map.RevealAsync(current.Code, mapSelected);
+            await map.RevealAsync(current, PickedOnMap);
             await Task.Delay(TimeSpan.FromSeconds(2));
             await NextRoundAsync();
         }
@@ -258,7 +260,7 @@
             wrongCount++;
             focusContinue = true;
             StateHasChanged();
-            await map.RevealAsync(current.Code, mapSelected);
+            await map.RevealAsync(current, PickedOnMap);
         }
     }
 }

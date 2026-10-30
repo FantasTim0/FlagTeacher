@@ -14,6 +14,7 @@ let dotNet;
 let layers = new Map();
 let home = new Map();
 let dots = [];
+let labeled = [];
 let marks = new Map();
 let selected = null;
 let locked = false;
@@ -26,6 +27,18 @@ function restyle(code) {
             layer.bringToFront();
         }
     }
+}
+
+function label(code, name, kind) {
+    const layer = home.get(code);
+    layer.bindTooltip(name, { permanent: true, direction: "center", className: `map-label ${kind}` });
+    layer.openTooltip(layer.getBounds().getCenter());
+    labeled.push(layer);
+}
+
+function clearLabels() {
+    labeled.forEach((layer) => layer.unbindTooltip());
+    labeled = [];
 }
 
 // Shows each dot only while its country is too small on screen to click comfortably.
@@ -129,11 +142,12 @@ export function reset() {
     locked = false;
     selected = null;
     marks.clear();
+    clearLabels();
     layers.forEach((_, code) => restyle(code));
     map.setView([20, 0], 2);
 }
 
-export function reveal(correct, picked) {
+export function reveal(correct, picked, correctName, pickedName) {
     locked = true;
     marks.clear();
     if (picked && picked !== correct) {
@@ -141,6 +155,11 @@ export function reveal(correct, picked) {
     }
     marks.set(correct, "correct");
     layers.forEach((_, code) => restyle(code));
+    clearLabels();
+    label(correct, correctName, "correct");
+    if (picked && picked !== correct) {
+        label(picked, pickedName, "wrong");
+    }
     map.fitBounds(home.get(correct).getBounds(), { maxZoom: 5, padding: [20, 20] });
 }
 
@@ -150,6 +169,7 @@ export function destroy() {
     layers = new Map();
     home = new Map();
     dots = [];
+    labeled = [];
     marks = new Map();
     selected = null;
     locked = false;

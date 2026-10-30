@@ -1,3 +1,4 @@
+@using FlagTeacher.Web.Client.Models
 @using Microsoft.JSInterop
 @implements IAsyncDisposable
 @inject IJSRuntime JS
@@ -40,12 +41,12 @@
         }
     }
 
-    /// <summary>Locks the map, highlights the correct country and marks a wrong pick.</summary>
-    public async Task RevealAsync(string correctCode, string? pickedCode)
+    /// <summary>Locks the map, highlights the correct country and marks a wrong pick, both labeled with their names.</summary>
+    public async Task RevealAsync(Country correct, Country? picked)
     {
         if (module is not null)
         {
-            await module.InvokeVoidAsync("reveal", correctCode, pickedCode);
+            await module.InvokeVoidAsync("reveal", correct.Code, picked?.Code, correct.Name, picked?.Name);
         }
     }
 
