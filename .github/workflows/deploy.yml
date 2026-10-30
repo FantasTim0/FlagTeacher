@@ -1,0 +1,52 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish
+        run: dotnet publish FlagTeacher.Web/FlagTeacher.Web.Client -c Release -o release
+
+      # A project site lives under /<repository>/, a <user>.github.io site at the root.
+      - name: Set the base path
+        run: |
+          repo="${GITHUB_REPOSITORY#*/}"
+          if [[ "$repo" == *.github.io ]]; then base="/"; else base="/$repo/"; fi
+          sed -i -E "s|<base href=\"/\"\s*/>|<base href=\"$base\" />|" release/wwwroot/index.html
+          grep '<base href' release/wwwroot/index.html
+
+      # GitHub Pages serves 404.html for unknown paths; reuse the app shell for it.
+      - name: Prepare the site
+        run: |
+          cp release/wwwroot/index.html release/wwwroot/404.html
+          find release/wwwroot -name '*.br' -delete -o -name '*.gz' -delete
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: release/wwwroot
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
