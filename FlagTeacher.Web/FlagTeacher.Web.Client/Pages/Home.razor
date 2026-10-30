@@ -1,0 +1,112 @@
+@page "/"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@using FlagTeacher.Web.Client.Models
+@inject HttpClient Http
+
+<PageTitle>Flag Teacher</PageTitle>
+
+<main class="game">
+    <h1>Which country is this?</h1>
+
+    @if (loadError is not null)
+    {
+        <p class="message wrong">@loadError</p>
+    }
+    else if (current is null)
+    {
+        <p>Loading…</p>
+    }
+    else
+    {
+        <img class="flag" src="@current.FlagUrl" alt="Flag of an unknown country" />
+
+        <input class="picker" list="countries" placeholder="Select a country…"
+               disabled="@(state != GameState.Guessing)"
+               @bind="selectedName" @bind:event="oninput" />
+        <datalist id="countries">
+            @foreach (var country in countries)
+            {
+                <option value="@country.Name"></option>
+            }
+        </datalist>
+
+        @if (state == GameState.Guessing)
+        {
+            <button class="action" disabled="@(SelectedCountry is null)" @onclick="GuessAsync">Guess</button>
+        }
+        else if (state == GameState.Correct)
+        {
+            <p class="message correct">Correct</p>
+        }
+        else
+        {
+            <p class="message wrong">Wrong! This is the flag of @current.Name.</p>
+            <button class="action" @onclick="NextRound">Continue</button>
+        }
+    }
+</main>
+
+@code {
+    private enum GameState { Guessing, Correct, Wrong }
+
+    private List<Country> countries = [];
+    private Country? current;
+    private string selectedName = "";
+    private GameState state;
+    private string? loadError;
+
+    private Country? SelectedCountry =>
+        countries.FirstOrDefault(c => string.Equals(c.Name, selectedName, StringComparison.OrdinalIgnoreCase));
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            countries = await Http.GetFromJsonAsync<List<Country>>("api/countries") ?? [];
+            if (countries.Count == 0)
+            {
+                loadError = "No countries available.";
+                return;
+            }
+            NextRound();
+        }
+        catch (HttpRequestException)
+        {
+            loadError = "Could not load the list of countries.";
+        }
+    }
+
+    private void NextRound()
+    {
+        Country next;
+        do
+        {
+            next = countries[Random.Shared.Next(countries.Count)];
+        } while (countries.Count > 1 && next == current);
+
+        current = next;
+        selectedName = "";
+        state = GameState.Guessing;
+    }
+
+    private async Task GuessAsync()
+    {
+        var guess = SelectedCountry;
+        if (guess is null || current is null)
+        {
+            return;
+        }
+
+        if (guess == current)
+        {
+            state = GameState.Correct;
+            StateHasChanged();
+            await Task.Delay(TimeSpan.FromSeconds(2));
+            NextRound();
+        }
+        else
+        {
+            state = GameState.Wrong;
+        }
+    }
+}
