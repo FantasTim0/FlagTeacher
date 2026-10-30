@@ -119,6 +119,9 @@
         else if (focusContinue)
         {
             focusContinue = false;
+            // Let the Enter key press that submitted the guess finish first; otherwise its
+            // keypress lands on the freshly focused button and clicks it immediately.
+            await Task.Delay(150);
             await continueButton.FocusAsync();
         }
     }
