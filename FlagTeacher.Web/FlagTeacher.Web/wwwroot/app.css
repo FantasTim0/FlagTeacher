@@ -242,8 +242,9 @@ h1:focus {
     width: 2.25rem;
     height: 2.25rem;
     padding: 0;
-    font-size: 1.1rem;
-    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text);
     background: var(--surface);
     border: 1px solid var(--border-strong);
@@ -257,7 +258,15 @@ h1:focus {
 }
 
 :root[data-theme="dark"] .theme-toggle .sun {
-    display: inline;
+    display: block;
+}
+
+.theme-toggle svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .leaflet-bar a,
