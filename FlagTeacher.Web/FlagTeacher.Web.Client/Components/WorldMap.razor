@@ -1,0 +1,67 @@
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject IJSRuntime JS
+
+<div class="world-map" @ref="element"></div>
+
+@code {
+    private ElementReference element;
+    private IJSObjectReference? module;
+    private DotNetObjectReference<WorldMap>? self;
+
+    /// <summary>Raised once the outlines are loaded, with the codes of all selectable countries.</summary>
+    [Parameter] public EventCallback<IReadOnlyCollection<string>> Loaded { get; set; }
+
+    /// <summary>Raised when the user picks a country on the map, or null when the pick is cleared.</summary>
+    [Parameter] public EventCallback<string?> SelectionChanged { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+        {
+            return;
+        }
+
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./js/worldMap.js");
+        self = DotNetObjectReference.Create(this);
+        var codes = await module.InvokeAsync<string[]>("init", element, self, "data/country-shapes.geojson");
+        await Loaded.InvokeAsync(codes);
+    }
+
+    [JSInvokable]
+    public Task OnCountryClicked(string? code) => SelectionChanged.InvokeAsync(code);
+
+    /// <summary>Clears the selection and unlocks the map for a new round.</summary>
+    public async Task ResetAsync()
+    {
+        if (module is not null)
+        {
+            await module.InvokeVoidAsync("reset");
+        }
+    }
+
+    /// <summary>Locks the map, highlights the correct country and marks a wrong pick.</summary>
+    public async Task RevealAsync(string correctCode, string? pickedCode)
+    {
+        if (module is not null)
+        {
+            await module.InvokeVoidAsync("reveal", correctCode, pickedCode);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (module is not null)
+        {
+            try
+            {
+                await module.InvokeVoidAsync("destroy");
+                await module.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+            }
+        }
+        self?.Dispose();
+    }
+}

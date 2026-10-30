@@ -1,5 +1,6 @@
 @page "/"
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender: false))
+@using FlagTeacher.Web.Client.Components
 @using FlagTeacher.Web.Client.Models
 @inject HttpClient Http
 
@@ -18,14 +19,25 @@
     {
         <p class="message wrong">@loadError</p>
     }
-    else if (current is null)
-    {
-        <p>Lädt …</p>
-    }
     else
     {
-        <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" />
+        @if (current is null)
+        {
+            <p>Lädt …</p>
+        }
+        else
+        {
+            <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" />
+        }
 
+        @if (countries.Count > 0)
+        {
+            <WorldMap @ref="map" Loaded="OnShapesLoaded" SelectionChanged="OnMapSelected" />
+        }
+    }
+
+    @if (loadError is null && current is not null)
+    {
         <div class="autocomplete">
             <input class="picker" placeholder="Land auswählen …" autocomplete="off"
                    disabled="@(state != GameState.Guessing)"
@@ -48,7 +60,7 @@
 
         @if (state == GameState.Guessing)
         {
-            <button class="action" disabled="@(SelectedCountry is null)" @onclick="GuessAsync">Raten</button>
+            <button class="action" disabled="@(!CanGuess)" @onclick="GuessAsync">Raten</button>
         }
         else if (state == GameState.Correct)
         {
@@ -56,8 +68,8 @@
         }
         else
         {
-            <p class="message wrong">Falsch! Das ist die Flagge von @current.Name.</p>
-            <button class="action" @onclick="NextRound" @ref="continueButton">Weiter</button>
+            <p class="message wrong">@WrongMessage</p>
+            <button class="action" @onclick="NextRoundAsync" @ref="continueButton">Weiter</button>
         }
     }
 </main>
@@ -80,6 +92,20 @@
     private int wrongCount;
     private bool preventDefault;
     private int highlighted;
+    private WorldMap? map;
+    private HashSet<string> shapeCodes = [];
+    private string? mapSelected;
+    private bool nameCorrect;
+    private bool mapCorrect;
+
+    private bool CanGuess => SelectedCountry is not null && mapSelected is not null;
+
+    private string WrongMessage => (nameCorrect, mapCorrect) switch
+    {
+        (true, false) => $"Falsch! Das Land stimmt, aber auf der Karte hast du das falsche Land gewählt. Richtig ist das grün markierte Land ({current!.Name}).",
+        (false, true) => $"Falsch! Auf der Karte hast du das richtige Land gewählt, aber die Flagge gehört zu {current!.Name}.",
+        _ => $"Falsch! Das ist die Flagge von {current!.Name}.",
+    };
 
     private Country? SelectedCountry =>
         countries.FirstOrDefault(c => string.Equals(c.Name, selectedName, StringComparison.OrdinalIgnoreCase));
@@ -101,7 +127,6 @@
                 loadError = "Keine Länder verfügbar.";
                 return;
             }
-            NextRound();
         }
         catch (HttpRequestException)
         {
@@ -125,6 +150,19 @@
             await continueButton.FocusAsync();
         }
     }
+
+    private async Task OnShapesLoaded(IReadOnlyCollection<string> codes)
+    {
+        shapeCodes = [.. codes];
+        if (!countries.Any(c => shapeCodes.Contains(c.Code)))
+        {
+            loadError = "Keine Länder verfügbar.";
+            return;
+        }
+        await NextRoundAsync();
+    }
+
+    private void OnMapSelected(string? code) => mapSelected = code;
 
     private void OnInput(ChangeEventArgs e)
     {
@@ -164,50 +202,63 @@
             case "Enter" when isOpen && matches.Count > 0:
                 Choose(matches[Math.Min(highlighted, matches.Count - 1)]);
                 break;
-            case "Enter" when SelectedCountry is not null:
+            case "Enter" when CanGuess:
                 await GuessAsync();
                 break;
         }
     }
 
-    private void NextRound()
+    private async Task NextRoundAsync()
     {
+        // Only countries with an outline can be answered on the map.
+        var playable = countries.Where(c => shapeCodes.Contains(c.Code)).ToList();
         Country next;
         do
         {
-            next = countries[Random.Shared.Next(countries.Count)];
-        } while (countries.Count > 1 && next == current);
+            next = playable[Random.Shared.Next(playable.Count)];
+        } while (playable.Count > 1 && next == current);
 
         current = next;
         round++;
         selectedName = "";
+        mapSelected = null;
         isOpen = false;
         highlighted = 0;
         state = GameState.Guessing;
         focusPicker = true;
+        if (map is not null)
+        {
+            await map.ResetAsync();
+        }
     }
 
     private async Task GuessAsync()
     {
         var guess = SelectedCountry;
-        if (guess is null || current is null)
+        if (guess is null || mapSelected is null || current is null || map is null)
         {
             return;
         }
 
-        if (guess == current)
+        nameCorrect = guess == current;
+        mapCorrect = mapSelected == current.Code;
+
+        if (nameCorrect && mapCorrect)
         {
             state = GameState.Correct;
             correctCount++;
             StateHasChanged();
+            await map.RevealAsync(current.Code, mapSelected);
             await Task.Delay(TimeSpan.FromSeconds(2));
-            NextRound();
+            await NextRoundAsync();
         }
         else
         {
             state = GameState.Wrong;
             wrongCount++;
             focusContinue = true;
+            StateHasChanged();
+            await map.RevealAsync(current.Code, mapSelected);
         }
     }
 }
