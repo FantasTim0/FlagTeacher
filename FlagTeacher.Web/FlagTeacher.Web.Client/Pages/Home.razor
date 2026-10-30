@@ -22,7 +22,7 @@
 
         <input class="picker" list="countries" placeholder="Land auswählen …"
                disabled="@(state != GameState.Guessing)"
-               @bind="selectedName" @bind:event="oninput" />
+               @bind="selectedName" @bind:event="oninput" @ref="picker" />
         <datalist id="countries">
             @foreach (var country in countries)
             {
@@ -54,6 +54,8 @@
     private string selectedName = "";
     private GameState state;
     private string? loadError;
+    private ElementReference picker;
+    private bool focusPicker;
 
     private Country? SelectedCountry =>
         countries.FirstOrDefault(c => string.Equals(c.Name, selectedName, StringComparison.OrdinalIgnoreCase));
@@ -76,6 +78,15 @@
         }
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (focusPicker)
+        {
+            focusPicker = false;
+            await picker.FocusAsync();
+        }
+    }
+
     private void NextRound()
     {
         Country next;
@@ -87,6 +98,7 @@
         current = next;
         selectedName = "";
         state = GameState.Guessing;
+        focusPicker = true;
     }
 
     private async Task GuessAsync()
