@@ -1,3 +1,6 @@
+const dotRadius = 7;
+const dotMaxPixels = 14;
+
 const styles = {
     base: { weight: 0.8, color: "#6b7280", fillColor: "#f3efe6", fillOpacity: 1 },
     hover: { fillColor: "#d9d4c4", fillOpacity: 1 },
@@ -10,6 +13,7 @@ let map;
 let dotNet;
 let layers = new Map();
 let home = new Map();
+let dots = [];
 let marks = new Map();
 let selected = null;
 let locked = false;
@@ -20,6 +24,19 @@ function restyle(code) {
         layer.setStyle({ ...styles.base, ...(mark ? styles[mark] : {}) });
         if (mark) {
             layer.bringToFront();
+        }
+    }
+}
+
+// Shows each dot only while its country is too small on screen to click comfortably.
+function updateDots() {
+    const pixelsPerDegree = (256 * 2 ** map.getZoom()) / 360;
+    for (const dot of dots) {
+        const small = dot.degrees * pixelsPerDegree < dotMaxPixels;
+        if (small && !map.hasLayer(dot)) {
+            dot.addTo(map);
+        } else if (!small && map.hasLayer(dot)) {
+            dot.remove();
         }
     }
 }
@@ -48,6 +65,33 @@ export async function init(element, reference, shapesUrl) {
     map.attributionControl.addAttribution('Outlines: <a href="https://www.naturalearthdata.com">Natural Earth</a>');
 
     const data = await (await fetch(shapesUrl)).json();
+    const attach = (layer, code) => {
+        layer.on("click", () => {
+            if (locked) {
+                return;
+            }
+            const previous = selected;
+            selected = code === selected ? null : code;
+            if (previous) {
+                restyle(previous);
+            }
+            if (selected) {
+                restyle(selected);
+            }
+            dotNet.invokeMethodAsync("OnCountryClicked", selected);
+        });
+        layer.on("mouseover", () => {
+            if (!locked && code !== selected) {
+                layers.get(code).forEach((l) => l.setStyle(styles.hover));
+            }
+        });
+        layer.on("mouseout", () => {
+            if (!locked) {
+                restyle(code);
+            }
+        });
+    };
+
     for (const offset of [-360, 0, 360]) {
         L.geoJSON(shifted(data, offset), {
             style: () => styles.base,
@@ -57,33 +101,26 @@ export async function init(element, reference, shapesUrl) {
                 if (offset === 0) {
                     home.set(code, layer);
                 }
-                layer.on("click", () => {
-                    if (locked) {
-                        return;
-                    }
-                    const previous = selected;
-                    selected = code === selected ? null : code;
-                    if (previous) {
-                        restyle(previous);
-                    }
-                    if (selected) {
-                        restyle(selected);
-                    }
-                    dotNet.invokeMethodAsync("OnCountryClicked", selected);
-                });
-                layer.on("mouseover", () => {
-                    if (!locked && code !== selected) {
-                        layers.get(code).forEach((l) => l.setStyle(styles.hover));
-                    }
-                });
-                layer.on("mouseout", () => {
-                    if (!locked) {
-                        restyle(code);
-                    }
-                });
+                attach(layer, code);
             },
         }).addTo(map);
     }
+
+    // Countries that are only a few pixels wide get a dot on top, which is easy to hit.
+    for (const [code, layer] of home) {
+        const bounds = layer.getBounds();
+        const center = bounds.getCenter();
+        const degrees = Math.max(bounds.getEast() - bounds.getWest(), bounds.getNorth() - bounds.getSouth());
+        for (const offset of [-360, 0, 360]) {
+            const dot = L.circleMarker([center.lat, center.lng + offset], { ...styles.base, radius: dotRadius });
+            dot.degrees = degrees;
+            layers.get(code).push(dot);
+            attach(dot, code);
+            dots.push(dot);
+        }
+    }
+    map.on("zoomend", updateDots);
+    updateDots();
 
     return [...layers.keys()];
 }
@@ -112,6 +149,7 @@ export function destroy() {
     map = null;
     layers = new Map();
     home = new Map();
+    dots = [];
     marks = new Map();
     selected = null;
     locked = false;
