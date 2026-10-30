@@ -20,15 +20,25 @@
     {
         <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" />
 
-        <input class="picker" list="countries" placeholder="Land auswählen …"
-               disabled="@(state != GameState.Guessing)"
-               @bind="selectedName" @bind:event="oninput" @ref="picker" />
-        <datalist id="countries">
-            @foreach (var country in countries)
+        <div class="autocomplete">
+            <input class="picker" placeholder="Land auswählen …" autocomplete="off"
+                   disabled="@(state != GameState.Guessing)"
+                   value="@selectedName" @oninput="OnInput" @onkeydown="OnKeyDown"
+                   @onfocus="Open" @onblur="Close"
+                   @onkeydown:preventDefault="preventDefault" @ref="picker" />
+            @if (isOpen && Matches.Count > 0)
             {
-                <option value="@country.Name"></option>
+                <ul class="suggestions" role="listbox">
+                    @for (var i = 0; i < Matches.Count; i++)
+                    {
+                        var match = Matches[i];
+                        <li role="option" class="@(i == highlighted ? "active" : null)"
+                            @onmousedown="() => Choose(match)"
+                            @onmousedown:preventDefault>@match.Name</li>
+                    }
+                </ul>
             }
-        </datalist>
+        </div>
 
         @if (state == GameState.Guessing)
         {
@@ -56,9 +66,19 @@
     private string? loadError;
     private ElementReference picker;
     private bool focusPicker;
+    private bool isOpen;
+    private bool preventDefault;
+    private int highlighted;
 
     private Country? SelectedCountry =>
         countries.FirstOrDefault(c => string.Equals(c.Name, selectedName, StringComparison.OrdinalIgnoreCase));
+
+    private List<Country> Matches => string.IsNullOrWhiteSpace(selectedName)
+        ? countries
+        : countries
+            .Where(c => c.Name.Contains(selectedName.Trim(), StringComparison.CurrentCultureIgnoreCase))
+            .OrderByDescending(c => c.Name.StartsWith(selectedName.Trim(), StringComparison.CurrentCultureIgnoreCase))
+            .ToList();
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,6 +107,50 @@
         }
     }
 
+    private void OnInput(ChangeEventArgs e)
+    {
+        selectedName = e.Value?.ToString() ?? "";
+        highlighted = 0;
+        isOpen = true;
+    }
+
+    private void Open() => isOpen = !string.IsNullOrWhiteSpace(selectedName);
+
+    private void Close() => isOpen = false;
+
+    private void Choose(Country country)
+    {
+        selectedName = country.Name;
+        isOpen = false;
+    }
+
+    private async Task OnKeyDown(KeyboardEventArgs e)
+    {
+        preventDefault = false;
+        var matches = Matches;
+        switch (e.Key)
+        {
+            case "ArrowDown" when matches.Count > 0:
+                preventDefault = true;
+                isOpen = true;
+                highlighted = Math.Min(highlighted + 1, matches.Count - 1);
+                break;
+            case "ArrowUp" when matches.Count > 0:
+                preventDefault = true;
+                highlighted = Math.Max(highlighted - 1, 0);
+                break;
+            case "Escape":
+                isOpen = false;
+                break;
+            case "Enter" when isOpen && matches.Count > 0:
+                Choose(matches[Math.Min(highlighted, matches.Count - 1)]);
+                break;
+            case "Enter" when SelectedCountry is not null:
+                await GuessAsync();
+                break;
+        }
+    }
+
     private void NextRound()
     {
         Country next;
@@ -97,6 +161,8 @@
 
         current = next;
         selectedName = "";
+        isOpen = false;
+        highlighted = 0;
         state = GameState.Guessing;
         focusPicker = true;
     }

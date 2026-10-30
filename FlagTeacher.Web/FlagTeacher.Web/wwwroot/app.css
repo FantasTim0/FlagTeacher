@@ -55,6 +55,10 @@ h1:focus {
     border: 1px solid #ddd;
 }
 
+.picker {
+    box-sizing: border-box;
+}
+
 .picker, .action {
     width: 100%;
     padding: 0.6rem;
@@ -72,4 +76,38 @@ h1:focus {
 
 .message.wrong {
     color: #d32f2f;
+}
+
+
+.autocomplete {
+    position: relative;
+    width: 100%;
+}
+
+.suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    max-height: 15rem;
+    overflow-y: auto;
+    margin: 0.2rem 0 0;
+    padding: 0;
+    list-style: none;
+    background: #fff;
+    color: #222;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.suggestions li {
+    padding: 0.5rem 0.6rem;
+    cursor: pointer;
+}
+
+.suggestions li.active,
+.suggestions li:hover {
+    background: #e8f0fe;
 }
