@@ -1,9 +1,6 @@
-const tileUrl = "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png";
-const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
-
 const styles = {
-    base: { weight: 0.8, color: "#6b7280", fillColor: "#000", fillOpacity: 0.01 },
-    hover: { fillColor: "#6b7280", fillOpacity: 0.25 },
+    base: { weight: 0.8, color: "#6b7280", fillColor: "#f3efe6", fillOpacity: 1 },
+    hover: { fillColor: "#d9d4c4", fillOpacity: 1 },
     selected: { weight: 2, color: "#0d47a1", fillColor: "#1976d2", fillOpacity: 0.5 },
     correct: { weight: 2, color: "#1b5e20", fillColor: "#2e7d32", fillOpacity: 0.55 },
     wrong: { weight: 2, color: "#b71c1c", fillColor: "#c62828", fillOpacity: 0.5 },
@@ -48,7 +45,7 @@ export async function init(element, reference, shapesUrl) {
         maxBounds: [[-85, -540], [85, 540]],
         maxBoundsViscosity: 1,
     }).setView([20, 0], 2);
-    L.tileLayer(tileUrl, { attribution, subdomains: "abcd", maxZoom: 8 }).addTo(map);
+    map.attributionControl.addAttribution('Outlines: <a href="https://www.naturalearthdata.com">Natural Earth</a>');
 
     const data = await (await fetch(shapesUrl)).json();
     for (const offset of [-360, 0, 360]) {
