@@ -6,7 +6,7 @@
 <PageTitle>Flag Teacher</PageTitle>
 
 <main class="game">
-    <h1>Which country is this?</h1>
+    <h1>Welches Land ist das?</h1>
 
     @if (loadError is not null)
     {
@@ -14,13 +14,13 @@
     }
     else if (current is null)
     {
-        <p>Loading…</p>
+        <p>Lädt …</p>
     }
     else
     {
-        <img class="flag" src="@current.FlagUrl" alt="Flag of an unknown country" />
+        <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" />
 
-        <input class="picker" list="countries" placeholder="Select a country…"
+        <input class="picker" list="countries" placeholder="Land auswählen …"
                disabled="@(state != GameState.Guessing)"
                @bind="selectedName" @bind:event="oninput" />
         <datalist id="countries">
@@ -32,16 +32,16 @@
 
         @if (state == GameState.Guessing)
         {
-            <button class="action" disabled="@(SelectedCountry is null)" @onclick="GuessAsync">Guess</button>
+            <button class="action" disabled="@(SelectedCountry is null)" @onclick="GuessAsync">Raten</button>
         }
         else if (state == GameState.Correct)
         {
-            <p class="message correct">Correct</p>
+            <p class="message correct">Richtig!</p>
         }
         else
         {
-            <p class="message wrong">Wrong! This is the flag of @current.Name.</p>
-            <button class="action" @onclick="NextRound">Continue</button>
+            <p class="message wrong">Falsch! Das ist die Flagge von @current.Name.</p>
+            <button class="action" @onclick="NextRound">Weiter</button>
         }
     }
 </main>
@@ -65,14 +65,14 @@
             countries = await Http.GetFromJsonAsync<List<Country>>("api/countries") ?? [];
             if (countries.Count == 0)
             {
-                loadError = "No countries available.";
+                loadError = "Keine Länder verfügbar.";
                 return;
             }
             NextRound();
         }
         catch (HttpRequestException)
         {
-            loadError = "Could not load the list of countries.";
+            loadError = "Die Länderliste konnte nicht geladen werden.";
         }
     }
 
