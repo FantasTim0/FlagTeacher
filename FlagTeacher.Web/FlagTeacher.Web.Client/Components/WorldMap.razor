@@ -41,12 +41,16 @@
         }
     }
 
-    /// <summary>Locks the map, highlights the correct country and marks a wrong pick, both labeled with their names.</summary>
-    public async Task RevealAsync(Country correct, Country? picked)
+    /// <summary>
+    /// Locks the map, highlights the correct country and marks a wrong pick, both labeled with their names.
+    /// When <paramref name="allCountries"/> is given, every other country gets a plain name label too.
+    /// </summary>
+    public async Task RevealAsync(Country correct, Country? picked, IEnumerable<Country>? allCountries = null)
     {
         if (module is not null)
         {
-            await module.InvokeVoidAsync("reveal", correct.Code, picked?.Code, correct.Name, picked?.Name);
+            await module.InvokeVoidAsync("reveal", correct.Code, picked?.Code, correct.Name, picked?.Name,
+                allCountries?.DistinctBy(c => c.Code).ToDictionary(c => c.Code, c => c.Name));
         }
     }
 
