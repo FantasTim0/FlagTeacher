@@ -3,13 +3,21 @@ const plainCharPixels = 6.5;
 const dotRadius = 7;
 const dotMaxPixels = 14;
 
-const styles = {
-    base: { weight: 0.8, color: "#6b7280", fillColor: "#f3efe6", fillOpacity: 1 },
-    hover: { fillColor: "#d9d4c4", fillOpacity: 1 },
-    selected: { weight: 2, color: "#0d47a1", fillColor: "#1976d2", fillOpacity: 0.5 },
-    correct: { weight: 2, color: "#1b5e20", fillColor: "#2e7d32", fillOpacity: 0.55 },
-    wrong: { weight: 2, color: "#b71c1c", fillColor: "#c62828", fillOpacity: 0.5 },
-};
+// Colors come from the page's CSS variables, so the map follows the light/dark theme.
+function readStyles() {
+    const css = getComputedStyle(document.documentElement);
+    const color = (name) => css.getPropertyValue(name).trim();
+    return {
+        base: { weight: 0.8, color: color("--outline"), fillColor: color("--land"), fillOpacity: 1 },
+        hover: { fillColor: color("--land-hover"), fillOpacity: 1 },
+        selected: { weight: 2, color: color("--map-selected-stroke"), fillColor: "#1976d2", fillOpacity: 0.55 },
+        correct: { weight: 2, color: color("--map-correct-stroke"), fillColor: "#2e7d32", fillOpacity: 0.6 },
+        wrong: { weight: 2, color: color("--map-wrong-stroke"), fillColor: "#c62828", fillOpacity: 0.55 },
+    };
+}
+
+let styles = readStyles();
+let themeObserver;
 
 let map;
 let dotNet;
@@ -125,6 +133,11 @@ export async function init(element, reference, shapesUrl) {
         maxBounds: [[-85, -540], [85, 540]],
         maxBoundsViscosity: 1,
     }).setView([20, 0], 2);
+    themeObserver = new MutationObserver(() => {
+        styles = readStyles();
+        layers.forEach((_, code) => restyle(code));
+    });
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     map.attributionControl.addAttribution('Outlines: <a href="https://www.naturalearthdata.com">Natural Earth</a>');
 
     const data = await (await fetch(shapesUrl)).json();
@@ -218,6 +231,7 @@ export function reveal(correct, picked, correctName, pickedName, names) {
 }
 
 export function destroy() {
+    themeObserver?.disconnect();
     map?.remove();
     map = null;
     layers = new Map();
