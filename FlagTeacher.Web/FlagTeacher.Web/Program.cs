@@ -1,10 +1,20 @@
 using FlagTeacher.Web.Components;
+using FlagTeacher.Web.Countries;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.Configure<RestCountriesOptions>(builder.Configuration.GetSection(RestCountriesOptions.SectionName));
+builder.Services.AddMemoryCache();
+builder.Services.AddHttpClient<CountryService>((sp, client) =>
+{
+    var baseUrl = sp.GetRequiredService<IOptions<RestCountriesOptions>>().Value.BaseUrl;
+    client.BaseAddress = new Uri(baseUrl);
+});
 
 var app = builder.Build();
 
@@ -26,6 +36,7 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
+app.MapGet("/api/countries", (CountryService countries, CancellationToken ct) => countries.GetCountriesAsync(ct));
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(FlagTeacher.Web.Client._Imports).Assembly);
