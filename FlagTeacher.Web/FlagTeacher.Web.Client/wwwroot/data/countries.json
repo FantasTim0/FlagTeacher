@@ -1,0 +1,1252 @@
+[
+  {
+    "code": "AF",
+    "name": "Afghanistan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/af.svg"
+  },
+  {
+    "code": "EG",
+    "name": "Ägypten",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/eg.svg"
+  },
+  {
+    "code": "AX",
+    "name": "Åland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ax.svg"
+  },
+  {
+    "code": "AL",
+    "name": "Albanien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/al.svg"
+  },
+  {
+    "code": "DZ",
+    "name": "Algerien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/dz.svg"
+  },
+  {
+    "code": "AS",
+    "name": "Amerikanisch-Samoa",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/as.svg"
+  },
+  {
+    "code": "VI",
+    "name": "Amerikanische Jungferninseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/vi.svg"
+  },
+  {
+    "code": "AD",
+    "name": "Andorra",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ad.svg"
+  },
+  {
+    "code": "AO",
+    "name": "Angola",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ao.svg"
+  },
+  {
+    "code": "AI",
+    "name": "Anguilla",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ai.svg"
+  },
+  {
+    "code": "AQ",
+    "name": "Antarktis",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/aq.svg"
+  },
+  {
+    "code": "AG",
+    "name": "Antigua und Barbuda",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ag.svg"
+  },
+  {
+    "code": "GQ",
+    "name": "Äquatorialguinea",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gq.svg"
+  },
+  {
+    "code": "AR",
+    "name": "Argentinien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ar.svg"
+  },
+  {
+    "code": "AM",
+    "name": "Armenien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/am.svg"
+  },
+  {
+    "code": "AW",
+    "name": "Aruba",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/aw.svg"
+  },
+  {
+    "code": "AZ",
+    "name": "Aserbaidschan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/az.svg"
+  },
+  {
+    "code": "ET",
+    "name": "Äthiopien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/et.svg"
+  },
+  {
+    "code": "AU",
+    "name": "Australien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/au.svg"
+  },
+  {
+    "code": "BS",
+    "name": "Bahamas",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bs.svg"
+  },
+  {
+    "code": "BH",
+    "name": "Bahrain",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bh.svg"
+  },
+  {
+    "code": "BD",
+    "name": "Bangladesch",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bd.svg"
+  },
+  {
+    "code": "BB",
+    "name": "Barbados",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bb.svg"
+  },
+  {
+    "code": "BE",
+    "name": "Belgien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/be.svg"
+  },
+  {
+    "code": "BZ",
+    "name": "Belize",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bz.svg"
+  },
+  {
+    "code": "BJ",
+    "name": "Benin",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bj.svg"
+  },
+  {
+    "code": "BM",
+    "name": "Bermuda",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bm.svg"
+  },
+  {
+    "code": "BT",
+    "name": "Bhutan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bt.svg"
+  },
+  {
+    "code": "BO",
+    "name": "Bolivien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bo.svg"
+  },
+  {
+    "code": "BA",
+    "name": "Bosnien und Herzegowina",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ba.svg"
+  },
+  {
+    "code": "BW",
+    "name": "Botswana",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bw.svg"
+  },
+  {
+    "code": "BV",
+    "name": "Bouvetinsel",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bv.svg"
+  },
+  {
+    "code": "BR",
+    "name": "Brasilien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/br.svg"
+  },
+  {
+    "code": "VG",
+    "name": "Britische Jungferninseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/vg.svg"
+  },
+  {
+    "code": "IO",
+    "name": "Britisches Territorium im Indischen Ozean",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/io.svg"
+  },
+  {
+    "code": "BN",
+    "name": "Brunei",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bn.svg"
+  },
+  {
+    "code": "BG",
+    "name": "Bulgarien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bg.svg"
+  },
+  {
+    "code": "BF",
+    "name": "Burkina Faso",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bf.svg"
+  },
+  {
+    "code": "BI",
+    "name": "Burundi",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bi.svg"
+  },
+  {
+    "code": "CL",
+    "name": "Chile",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cl.svg"
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cn.svg"
+  },
+  {
+    "code": "CK",
+    "name": "Cookinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ck.svg"
+  },
+  {
+    "code": "CR",
+    "name": "Costa Rica",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cr.svg"
+  },
+  {
+    "code": "CW",
+    "name": "Curaçao",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cw.svg"
+  },
+  {
+    "code": "DK",
+    "name": "Dänemark",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/dk.svg"
+  },
+  {
+    "code": "DE",
+    "name": "Deutschland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/de.svg"
+  },
+  {
+    "code": "DM",
+    "name": "Dominica",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/dm.svg"
+  },
+  {
+    "code": "DO",
+    "name": "Dominikanische Republik",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/do.svg"
+  },
+  {
+    "code": "DJ",
+    "name": "Dschibuti",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/dj.svg"
+  },
+  {
+    "code": "EC",
+    "name": "Ecuador",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ec.svg"
+  },
+  {
+    "code": "SV",
+    "name": "El Salvador",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sv.svg"
+  },
+  {
+    "code": "CI",
+    "name": "Elfenbeinküste",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ci.svg"
+  },
+  {
+    "code": "ER",
+    "name": "Eritrea",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/er.svg"
+  },
+  {
+    "code": "EE",
+    "name": "Estland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ee.svg"
+  },
+  {
+    "code": "FK",
+    "name": "Falklandinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fk.svg"
+  },
+  {
+    "code": "FO",
+    "name": "Färöer-Inseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fo.svg"
+  },
+  {
+    "code": "FJ",
+    "name": "Fidschi",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fj.svg"
+  },
+  {
+    "code": "FI",
+    "name": "Finnland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fi.svg"
+  },
+  {
+    "code": "FR",
+    "name": "Frankreich",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fr.svg"
+  },
+  {
+    "code": "GF",
+    "name": "Französisch-Guayana",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gf.svg"
+  },
+  {
+    "code": "PF",
+    "name": "Französisch-Polynesien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pf.svg"
+  },
+  {
+    "code": "TF",
+    "name": "Französische Süd- und Antarktisgebiete",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tf.svg"
+  },
+  {
+    "code": "GA",
+    "name": "Gabun",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ga.svg"
+  },
+  {
+    "code": "GM",
+    "name": "Gambia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gm.svg"
+  },
+  {
+    "code": "GE",
+    "name": "Georgien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ge.svg"
+  },
+  {
+    "code": "GH",
+    "name": "Ghana",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gh.svg"
+  },
+  {
+    "code": "GI",
+    "name": "Gibraltar",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gi.svg"
+  },
+  {
+    "code": "GD",
+    "name": "Grenada",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gd.svg"
+  },
+  {
+    "code": "GR",
+    "name": "Griechenland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gr.svg"
+  },
+  {
+    "code": "GL",
+    "name": "Grönland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gl.svg"
+  },
+  {
+    "code": "GP",
+    "name": "Guadeloupe",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gp.svg"
+  },
+  {
+    "code": "GU",
+    "name": "Guam",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gu.svg"
+  },
+  {
+    "code": "GT",
+    "name": "Guatemala",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gt.svg"
+  },
+  {
+    "code": "GG",
+    "name": "Guernsey",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gg.svg"
+  },
+  {
+    "code": "GN",
+    "name": "Guinea",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gn.svg"
+  },
+  {
+    "code": "GW",
+    "name": "Guinea-Bissau",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gw.svg"
+  },
+  {
+    "code": "GY",
+    "name": "Guyana",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gy.svg"
+  },
+  {
+    "code": "HT",
+    "name": "Haiti",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ht.svg"
+  },
+  {
+    "code": "HM",
+    "name": "Heard und die McDonaldinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/hm.svg"
+  },
+  {
+    "code": "HN",
+    "name": "Honduras",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/hn.svg"
+  },
+  {
+    "code": "HK",
+    "name": "Hongkong",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/hk.svg"
+  },
+  {
+    "code": "IN",
+    "name": "Indien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/in.svg"
+  },
+  {
+    "code": "ID",
+    "name": "Indonesien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/id.svg"
+  },
+  {
+    "code": "IM",
+    "name": "Insel Man",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/im.svg"
+  },
+  {
+    "code": "IQ",
+    "name": "Irak",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/iq.svg"
+  },
+  {
+    "code": "IR",
+    "name": "Iran",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ir.svg"
+  },
+  {
+    "code": "IE",
+    "name": "Irland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ie.svg"
+  },
+  {
+    "code": "IS",
+    "name": "Island",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/is.svg"
+  },
+  {
+    "code": "IL",
+    "name": "Israel",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/il.svg"
+  },
+  {
+    "code": "IT",
+    "name": "Italien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/it.svg"
+  },
+  {
+    "code": "JM",
+    "name": "Jamaika",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/jm.svg"
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/jp.svg"
+  },
+  {
+    "code": "YE",
+    "name": "Jemen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ye.svg"
+  },
+  {
+    "code": "JE",
+    "name": "Jersey",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/je.svg"
+  },
+  {
+    "code": "JO",
+    "name": "Jordanien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/jo.svg"
+  },
+  {
+    "code": "KY",
+    "name": "Kaimaninseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ky.svg"
+  },
+  {
+    "code": "KH",
+    "name": "Kambodscha",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kh.svg"
+  },
+  {
+    "code": "CM",
+    "name": "Kamerun",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cm.svg"
+  },
+  {
+    "code": "CA",
+    "name": "Kanada",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ca.svg"
+  },
+  {
+    "code": "CV",
+    "name": "Kap Verde",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cv.svg"
+  },
+  {
+    "code": "BQ",
+    "name": "Karibische Niederlande",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bq.svg"
+  },
+  {
+    "code": "KZ",
+    "name": "Kasachstan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kz.svg"
+  },
+  {
+    "code": "QA",
+    "name": "Katar",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/qa.svg"
+  },
+  {
+    "code": "KE",
+    "name": "Kenia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ke.svg"
+  },
+  {
+    "code": "KG",
+    "name": "Kirgisistan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kg.svg"
+  },
+  {
+    "code": "KI",
+    "name": "Kiribati",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ki.svg"
+  },
+  {
+    "code": "UM",
+    "name": "Kleinere Inselbesitzungen der Vereinigten Staaten",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/um.svg"
+  },
+  {
+    "code": "CC",
+    "name": "Kokosinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cc.svg"
+  },
+  {
+    "code": "CO",
+    "name": "Kolumbien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/co.svg"
+  },
+  {
+    "code": "KM",
+    "name": "Komoren",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/km.svg"
+  },
+  {
+    "code": "CG",
+    "name": "Kongo",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cg.svg"
+  },
+  {
+    "code": "CD",
+    "name": "Kongo (Dem. Rep.)",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cd.svg"
+  },
+  {
+    "code": "XK",
+    "name": "Kosovo",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/xk.svg"
+  },
+  {
+    "code": "HR",
+    "name": "Kroatien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/hr.svg"
+  },
+  {
+    "code": "CU",
+    "name": "Kuba",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cu.svg"
+  },
+  {
+    "code": "KW",
+    "name": "Kuwait",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kw.svg"
+  },
+  {
+    "code": "LA",
+    "name": "Laos",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/la.svg"
+  },
+  {
+    "code": "LS",
+    "name": "Lesotho",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ls.svg"
+  },
+  {
+    "code": "LV",
+    "name": "Lettland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lv.svg"
+  },
+  {
+    "code": "LB",
+    "name": "Libanon",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lb.svg"
+  },
+  {
+    "code": "LR",
+    "name": "Liberia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lr.svg"
+  },
+  {
+    "code": "LY",
+    "name": "Libyen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ly.svg"
+  },
+  {
+    "code": "LI",
+    "name": "Liechtenstein",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/li.svg"
+  },
+  {
+    "code": "LT",
+    "name": "Litauen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lt.svg"
+  },
+  {
+    "code": "LU",
+    "name": "Luxemburg",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lu.svg"
+  },
+  {
+    "code": "MO",
+    "name": "Macao",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mo.svg"
+  },
+  {
+    "code": "MG",
+    "name": "Madagaskar",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mg.svg"
+  },
+  {
+    "code": "MW",
+    "name": "Malawi",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mw.svg"
+  },
+  {
+    "code": "MY",
+    "name": "Malaysia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/my.svg"
+  },
+  {
+    "code": "MV",
+    "name": "Malediven",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mv.svg"
+  },
+  {
+    "code": "ML",
+    "name": "Mali",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ml.svg"
+  },
+  {
+    "code": "MT",
+    "name": "Malta",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mt.svg"
+  },
+  {
+    "code": "MA",
+    "name": "Marokko",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ma.svg"
+  },
+  {
+    "code": "MH",
+    "name": "Marshallinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mh.svg"
+  },
+  {
+    "code": "MQ",
+    "name": "Martinique",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mq.svg"
+  },
+  {
+    "code": "MR",
+    "name": "Mauretanien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mr.svg"
+  },
+  {
+    "code": "MU",
+    "name": "Mauritius",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mu.svg"
+  },
+  {
+    "code": "YT",
+    "name": "Mayotte",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/yt.svg"
+  },
+  {
+    "code": "MX",
+    "name": "Mexiko",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mx.svg"
+  },
+  {
+    "code": "FM",
+    "name": "Mikronesien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fm.svg"
+  },
+  {
+    "code": "MD",
+    "name": "Moldawien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/md.svg"
+  },
+  {
+    "code": "MC",
+    "name": "Monaco",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mc.svg"
+  },
+  {
+    "code": "MN",
+    "name": "Mongolei",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mn.svg"
+  },
+  {
+    "code": "ME",
+    "name": "Montenegro",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/me.svg"
+  },
+  {
+    "code": "MS",
+    "name": "Montserrat",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ms.svg"
+  },
+  {
+    "code": "MZ",
+    "name": "Mosambik",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mz.svg"
+  },
+  {
+    "code": "MM",
+    "name": "Myanmar",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mm.svg"
+  },
+  {
+    "code": "NA",
+    "name": "Namibia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/na.svg"
+  },
+  {
+    "code": "NR",
+    "name": "Nauru",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/nr.svg"
+  },
+  {
+    "code": "NP",
+    "name": "Nepal",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/np.svg"
+  },
+  {
+    "code": "NC",
+    "name": "Neukaledonien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/nc.svg"
+  },
+  {
+    "code": "NZ",
+    "name": "Neuseeland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/nz.svg"
+  },
+  {
+    "code": "NI",
+    "name": "Nicaragua",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ni.svg"
+  },
+  {
+    "code": "NL",
+    "name": "Niederlande",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/nl.svg"
+  },
+  {
+    "code": "NE",
+    "name": "Niger",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ne.svg"
+  },
+  {
+    "code": "NG",
+    "name": "Nigeria",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ng.svg"
+  },
+  {
+    "code": "NU",
+    "name": "Niue",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/nu.svg"
+  },
+  {
+    "code": "KP",
+    "name": "Nordkorea",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kp.svg"
+  },
+  {
+    "code": "MP",
+    "name": "Nördliche Marianen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mp.svg"
+  },
+  {
+    "code": "MK",
+    "name": "Nordmazedonien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mk.svg"
+  },
+  {
+    "code": "NF",
+    "name": "Norfolkinsel",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/nf.svg"
+  },
+  {
+    "code": "NO",
+    "name": "Norwegen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/no.svg"
+  },
+  {
+    "code": "OM",
+    "name": "Oman",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/om.svg"
+  },
+  {
+    "code": "AT",
+    "name": "Österreich",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/at.svg"
+  },
+  {
+    "code": "TL",
+    "name": "Osttimor",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tl.svg"
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pk.svg"
+  },
+  {
+    "code": "PS",
+    "name": "Palästina",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ps.svg"
+  },
+  {
+    "code": "PW",
+    "name": "Palau",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pw.svg"
+  },
+  {
+    "code": "PA",
+    "name": "Panama",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pa.svg"
+  },
+  {
+    "code": "PG",
+    "name": "Papua-Neuguinea",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pg.svg"
+  },
+  {
+    "code": "PY",
+    "name": "Paraguay",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/py.svg"
+  },
+  {
+    "code": "PE",
+    "name": "Peru",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pe.svg"
+  },
+  {
+    "code": "PH",
+    "name": "Philippinen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ph.svg"
+  },
+  {
+    "code": "PN",
+    "name": "Pitcairninseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pn.svg"
+  },
+  {
+    "code": "PL",
+    "name": "Polen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pl.svg"
+  },
+  {
+    "code": "PT",
+    "name": "Portugal",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pt.svg"
+  },
+  {
+    "code": "PR",
+    "name": "Puerto Rico",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pr.svg"
+  },
+  {
+    "code": "RE",
+    "name": "Réunion",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/re.svg"
+  },
+  {
+    "code": "RW",
+    "name": "Ruanda",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/rw.svg"
+  },
+  {
+    "code": "RO",
+    "name": "Rumänien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ro.svg"
+  },
+  {
+    "code": "RU",
+    "name": "Russland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ru.svg"
+  },
+  {
+    "code": "BL",
+    "name": "Saint-Barthélemy",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bl.svg"
+  },
+  {
+    "code": "MF",
+    "name": "Saint-Martin",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mf.svg"
+  },
+  {
+    "code": "SB",
+    "name": "Salomonen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sb.svg"
+  },
+  {
+    "code": "ZM",
+    "name": "Sambia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/zm.svg"
+  },
+  {
+    "code": "WS",
+    "name": "Samoa",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ws.svg"
+  },
+  {
+    "code": "SM",
+    "name": "San Marino",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sm.svg"
+  },
+  {
+    "code": "ST",
+    "name": "São Tomé und Príncipe",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/st.svg"
+  },
+  {
+    "code": "SA",
+    "name": "Saudi-Arabien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sa.svg"
+  },
+  {
+    "code": "SE",
+    "name": "Schweden",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/se.svg"
+  },
+  {
+    "code": "CH",
+    "name": "Schweiz",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ch.svg"
+  },
+  {
+    "code": "SN",
+    "name": "Senegal",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sn.svg"
+  },
+  {
+    "code": "RS",
+    "name": "Serbien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/rs.svg"
+  },
+  {
+    "code": "SC",
+    "name": "Seychellen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sc.svg"
+  },
+  {
+    "code": "SL",
+    "name": "Sierra Leone",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sl.svg"
+  },
+  {
+    "code": "ZW",
+    "name": "Simbabwe",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/zw.svg"
+  },
+  {
+    "code": "SG",
+    "name": "Singapur",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sg.svg"
+  },
+  {
+    "code": "SX",
+    "name": "Sint Maarten",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sx.svg"
+  },
+  {
+    "code": "SK",
+    "name": "Slowakei",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sk.svg"
+  },
+  {
+    "code": "SI",
+    "name": "Slowenien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/si.svg"
+  },
+  {
+    "code": "SO",
+    "name": "Somalia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/so.svg"
+  },
+  {
+    "code": "ES",
+    "name": "Spanien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/es.svg"
+  },
+  {
+    "code": "SJ",
+    "name": "Spitzbergen und Jan Mayen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sj.svg"
+  },
+  {
+    "code": "LK",
+    "name": "Sri Lanka",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lk.svg"
+  },
+  {
+    "code": "SH",
+    "name": "St. Helena, Ascension und Tristan da Cunha",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sh.svg"
+  },
+  {
+    "code": "KN",
+    "name": "St. Kitts und Nevis",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kn.svg"
+  },
+  {
+    "code": "LC",
+    "name": "St. Lucia",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/lc.svg"
+  },
+  {
+    "code": "PM",
+    "name": "St. Pierre und Miquelon",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/pm.svg"
+  },
+  {
+    "code": "VC",
+    "name": "St. Vincent und die Grenadinen",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/vc.svg"
+  },
+  {
+    "code": "ZA",
+    "name": "Südafrika",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/za.svg"
+  },
+  {
+    "code": "SD",
+    "name": "Sudan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sd.svg"
+  },
+  {
+    "code": "GS",
+    "name": "Südgeorgien und die Südlichen Sandwichinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gs.svg"
+  },
+  {
+    "code": "KR",
+    "name": "Südkorea",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/kr.svg"
+  },
+  {
+    "code": "SS",
+    "name": "Südsudan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ss.svg"
+  },
+  {
+    "code": "SR",
+    "name": "Suriname",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sr.svg"
+  },
+  {
+    "code": "SZ",
+    "name": "Swasiland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sz.svg"
+  },
+  {
+    "code": "SY",
+    "name": "Syrien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sy.svg"
+  },
+  {
+    "code": "TJ",
+    "name": "Tadschikistan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tj.svg"
+  },
+  {
+    "code": "TW",
+    "name": "Taiwan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tw.svg"
+  },
+  {
+    "code": "TZ",
+    "name": "Tansania",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tz.svg"
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/th.svg"
+  },
+  {
+    "code": "TG",
+    "name": "Togo",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tg.svg"
+  },
+  {
+    "code": "TK",
+    "name": "Tokelau",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tk.svg"
+  },
+  {
+    "code": "TO",
+    "name": "Tonga",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/to.svg"
+  },
+  {
+    "code": "TT",
+    "name": "Trinidad und Tobago",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tt.svg"
+  },
+  {
+    "code": "TD",
+    "name": "Tschad",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/td.svg"
+  },
+  {
+    "code": "CZ",
+    "name": "Tschechien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cz.svg"
+  },
+  {
+    "code": "TN",
+    "name": "Tunesien",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tn.svg"
+  },
+  {
+    "code": "TR",
+    "name": "Türkei",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tr.svg"
+  },
+  {
+    "code": "TM",
+    "name": "Turkmenistan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tm.svg"
+  },
+  {
+    "code": "TC",
+    "name": "Turks-und Caicosinseln",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tc.svg"
+  },
+  {
+    "code": "TV",
+    "name": "Tuvalu",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/tv.svg"
+  },
+  {
+    "code": "UG",
+    "name": "Uganda",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ug.svg"
+  },
+  {
+    "code": "UA",
+    "name": "Ukraine",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ua.svg"
+  },
+  {
+    "code": "HU",
+    "name": "Ungarn",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/hu.svg"
+  },
+  {
+    "code": "UY",
+    "name": "Uruguay",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/uy.svg"
+  },
+  {
+    "code": "UZ",
+    "name": "Usbekistan",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/uz.svg"
+  },
+  {
+    "code": "VU",
+    "name": "Vanuatu",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/vu.svg"
+  },
+  {
+    "code": "VA",
+    "name": "Vatikanstadt",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/va.svg"
+  },
+  {
+    "code": "VE",
+    "name": "Venezuela",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ve.svg"
+  },
+  {
+    "code": "AE",
+    "name": "Vereinigte Arabische Emirate",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/ae.svg"
+  },
+  {
+    "code": "US",
+    "name": "Vereinigte Staaten",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/us.svg"
+  },
+  {
+    "code": "GB",
+    "name": "Vereinigtes Königreich",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/gb.svg"
+  },
+  {
+    "code": "VN",
+    "name": "Vietnam",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/vn.svg"
+  },
+  {
+    "code": "WF",
+    "name": "Wallis und Futuna",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/wf.svg"
+  },
+  {
+    "code": "CX",
+    "name": "Weihnachtsinsel",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cx.svg"
+  },
+  {
+    "code": "BY",
+    "name": "Weißrussland",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/by.svg"
+  },
+  {
+    "code": "EH",
+    "name": "Westsahara",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/eh.svg"
+  },
+  {
+    "code": "CF",
+    "name": "Zentralafrikanische Republik",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cf.svg"
+  },
+  {
+    "code": "CY",
+    "name": "Zypern",
+    "flagUrl": "https://flags.restcountries.com/v5/svg/cy.svg"
+  }
+]
