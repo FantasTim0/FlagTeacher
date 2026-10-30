@@ -57,7 +57,7 @@
         else
         {
             <p class="message wrong">Falsch! Das ist die Flagge von @current.Name.</p>
-            <button class="action" @onclick="NextRound">Weiter</button>
+            <button class="action" @onclick="NextRound" @ref="continueButton">Weiter</button>
         }
     }
 </main>
@@ -71,7 +71,9 @@
     private GameState state;
     private string? loadError;
     private ElementReference picker;
+    private ElementReference continueButton;
     private bool focusPicker;
+    private bool focusContinue;
     private bool isOpen;
     private int round;
     private int correctCount;
@@ -113,6 +115,11 @@
         {
             focusPicker = false;
             await picker.FocusAsync();
+        }
+        else if (focusContinue)
+        {
+            focusContinue = false;
+            await continueButton.FocusAsync();
         }
     }
 
@@ -197,6 +204,7 @@
         {
             state = GameState.Wrong;
             wrongCount++;
+            focusContinue = true;
         }
     }
 }
