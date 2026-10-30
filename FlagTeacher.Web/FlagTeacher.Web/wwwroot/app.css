@@ -111,3 +111,23 @@ h1:focus {
 .suggestions li:hover {
     background: #e8f0fe;
 }
+
+
+.stats {
+    position: fixed;
+    top: 0.75rem;
+    right: 1rem;
+    display: flex;
+    gap: 1rem;
+    font-family: system-ui, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.stats .correct {
+    color: #1a8f3c;
+}
+
+.stats .wrong {
+    color: #d32f2f;
+}

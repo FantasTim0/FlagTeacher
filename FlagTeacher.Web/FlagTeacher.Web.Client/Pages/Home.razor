@@ -5,6 +5,12 @@
 
 <PageTitle>Flag Teacher</PageTitle>
 
+<aside class="stats">
+    <span>Runde: @round</span>
+    <span class="correct">Richtig: @correctCount</span>
+    <span class="wrong">Falsch: @wrongCount</span>
+</aside>
+
 <main class="game">
     <h1>Welches Land ist das?</h1>
 
@@ -67,6 +73,9 @@
     private ElementReference picker;
     private bool focusPicker;
     private bool isOpen;
+    private int round;
+    private int correctCount;
+    private int wrongCount;
     private bool preventDefault;
     private int highlighted;
 
@@ -160,6 +169,7 @@
         } while (countries.Count > 1 && next == current);
 
         current = next;
+        round++;
         selectedName = "";
         isOpen = false;
         highlighted = 0;
@@ -178,6 +188,7 @@
         if (guess == current)
         {
             state = GameState.Correct;
+            correctCount++;
             StateHasChanged();
             await Task.Delay(TimeSpan.FromSeconds(2));
             NextRound();
@@ -185,6 +196,7 @@
         else
         {
             state = GameState.Wrong;
+            wrongCount++;
         }
     }
 }
