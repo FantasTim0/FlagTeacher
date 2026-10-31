@@ -41,6 +41,7 @@
         <div class="guess">
             <div class="autocomplete @(isOpen && Matches.Count > 0 ? "open" : null)">
                 <input class="picker" placeholder="Land auswählen …" autocomplete="off"
+                       autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"
                        disabled="@(state != GameState.Guessing)"
                        value="@selectedName" @oninput="OnInput" @onkeydown="OnKeyDown"
                        @onfocus="Open" @onclick="OpenList" @onblur="Close"
@@ -208,7 +209,15 @@
 
     private void OnInput(ChangeEventArgs e)
     {
-        selectedName = e.Value?.ToString() ?? "";
+        // iOS can send an input event without a change, e.g. when return commits its word suggestion; that
+        // must not reopen the list that return just closed.
+        var value = e.Value?.ToString() ?? "";
+        if (value == selectedName)
+        {
+            return;
+        }
+
+        selectedName = value;
         highlighted = 0;
         isOpen = true;
     }

@@ -16,9 +16,10 @@ export function scrollToTopUnlessVisible(element) {
 }
 
 // Closes the on-screen keyboard by taking the focus off the picker. Without one (on a desktop) the focus
-// stays, so return can still submit the guess right away.
+// stays, so return can still submit the guess right away. A touch screen counts as having one, since the
+// viewport does not always show whether it is open.
 export function closeKeyboard() {
-    if (isKeyboardOpen()) {
+    if (isKeyboardOpen() || window.matchMedia("(pointer: coarse)").matches) {
         document.activeElement?.blur?.();
     }
 }
