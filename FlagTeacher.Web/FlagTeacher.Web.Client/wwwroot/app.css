@@ -109,6 +109,12 @@ h1:focus {
     max-height: 10rem;
     object-fit: contain;
     border: 1px solid var(--border);
+    cursor: zoom-in;
+}
+
+.flag.enlarged {
+    max-height: 70vh;
+    cursor: zoom-out;
 }
 
 .picker {

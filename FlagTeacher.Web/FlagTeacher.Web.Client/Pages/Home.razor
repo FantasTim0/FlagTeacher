@@ -29,7 +29,10 @@
         }
         else
         {
-            <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" @ref="flag" />
+            <img class="flag @(flagEnlarged ? "enlarged" : null)" src="@current.FlagUrl"
+                 alt="Flagge eines unbekannten Landes" @ref="flag"
+                 title="@(flagEnlarged ? "Flagge verkleinern" : "Flagge vergrößern")"
+                 @onclick="() => flagEnlarged = !flagEnlarged" />
         }
     }
 
@@ -88,6 +91,7 @@
     private ElementReference picker;
     private ElementReference continueButton;
     private ElementReference flag;
+    private bool flagEnlarged;
     private IJSObjectReference? pageModule;
     private bool focusPicker;
     private bool focusContinue;
