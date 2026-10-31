@@ -10,8 +10,7 @@ repositories.
 | Piece | What it does |
 | --- | --- |
 | `FlagTeacher.Web/FlagTeacher.Web.Client` | The app itself. `dotnet publish` turns it into plain static files. |
-| `FlagTeacher.Web/FlagTeacher.CountryExport` | Downloads the country list from restcountries.com (this is where the API key is used) and writes `wwwroot/data/countries.json`. You run it on your machine; the result is committed. |
-| `FlagTeacher.Web/FlagTeacher.ShapeExport` | Downloads the country outlines from Natural Earth and writes `wwwroot/data/country-shapes.geojson`, one outline per code in the country list. Also run by hand; the result is committed. |
+| `FlagTeacher.Web/FlagTeacher.DataExport` | Writes the data the app loads: the country list from restcountries.com (this is where the API key is used) to `wwwroot/data/countries.json`, and the country outlines from Natural Earth to `wwwroot/data/country-shapes.geojson`. You run it on your machine; the results are committed. |
 | `.github/workflows/deploy.yml` | On every push to `main`: publishes the app, fixes the base path and deploys to Pages. |
 
 ## One-time setup
@@ -41,33 +40,29 @@ repositories.
 
 From then on every push to `main` redeploys the site, usually within a minute or two.
 
-## Updating the country list
+## Updating the country data
 
-Countries rarely change, so the list is exported by hand and committed, not fetched on every deploy.
+Countries rarely change, so the data is exported by hand and committed, not fetched on every deploy.
 
 ```sh
 # once: store your restcountries.com key (kept outside the repository)
-dotnet user-secrets set "RestCountries:ApiKey" "<key>" --project FlagTeacher.Web/FlagTeacher.CountryExport
+dotnet user-secrets set "RestCountries:ApiKey" "<key>" --project FlagTeacher.Web/FlagTeacher.DataExport
 
-# whenever you want a fresh list
-dotnet run --project FlagTeacher.Web/FlagTeacher.CountryExport
+# whenever you want fresh data: the country list, then the outlines that match it
+dotnet run --project FlagTeacher.Web/FlagTeacher.DataExport
 ```
 
-This overwrites `FlagTeacher.Web/FlagTeacher.Web.Client/wwwroot/data/countries.json`. Commit and push it
-to redeploy. The key can instead be supplied through the `RestCountries__ApiKey` environment variable.
+This overwrites `countries.json` and `country-shapes.geojson` in
+`FlagTeacher.Web/FlagTeacher.Web.Client/wwwroot/data`. Commit and push them to redeploy. The key can
+instead be supplied through the `RestCountries__ApiKey` environment variable.
 
-The file is public on the deployed site. It contains only country names, codes and flag URLs, never the key.
+Both files are public on the deployed site. They contain only country names, codes, flag URLs and
+outlines, never the key.
 
-## Updating the country outlines
+### Country outlines
 
-The outlines come from [Natural Earth](https://www.naturalearthdata.com) (public domain). Run the export
-after the country list, because it gives every code in `countries.json` an outline of its own:
-
-```sh
-dotnet run --project FlagTeacher.Web/FlagTeacher.ShapeExport
-```
-
-This overwrites `FlagTeacher.Web/FlagTeacher.Web.Client/wwwroot/data/country-shapes.geojson`. No key is needed.
+The outlines come from [Natural Earth](https://www.naturalearthdata.com) (public domain), one per code
+in `countries.json`:
 
 - Most outlines come from the 50m countries layer, keyed by its `ISO_A2_EH` code (that is how Taiwan
   gets `TW`).
