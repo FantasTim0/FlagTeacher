@@ -12,6 +12,8 @@ country *and* find it on the world map. The interface is in German.
   get a dot so they are easy to hit at any zoom level.
 - Press **Raten** (guess). A round only counts as correct if both the name and the map location are right.
   After a wrong guess the correct country is highlighted on the map.
+- Some territories fly the flag of their country, such as Svalbard and Norway. For those flags every country
+  with that flag counts as correct, and all of them are highlighted.
 - The score for the session (rounds, correct, wrong) is shown at the top. A light and a dark theme are
   available.
 
@@ -55,7 +57,7 @@ so the site needs no server and no API key. To refresh them:
 # once: store your restcountries.com API key
 dotnet user-secrets set "RestCountries:ApiKey" "<key>" --project FlagTeacher.Web/FlagTeacher.DataExport
 
-# country list, then the matching outlines
+# country list, shared flags, then the matching outlines
 dotnet run --project FlagTeacher.Web/FlagTeacher.DataExport
 ```
 

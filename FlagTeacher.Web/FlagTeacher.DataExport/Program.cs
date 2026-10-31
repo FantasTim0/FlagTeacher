@@ -6,7 +6,9 @@ using Microsoft.Extensions.Configuration;
 //
 //   dotnet run --project FlagTeacher.Web/FlagTeacher.DataExport
 //
-// The exports always run together, the country list first because the outlines are chosen to match it.
+// The exports always run together and in this order: the country list first, then the flag comparison and the
+// outlines, which both build on it.
+//
 // The restcountries.com API key is read from user secrets (RestCountries:ApiKey) or the RestCountries__ApiKey
 // environment variable; only the country export needs it.
 
@@ -21,6 +23,11 @@ var data = Path.Combine(FindRepositoryRoot(), dataDirectory);
 var countriesFile = Path.Combine(data, "countries.json");
 
 if (!await new CountryExport(configuration).RunAsync(countriesFile))
+{
+    return 1;
+}
+
+if (!await new FlagExport().RunAsync(countriesFile))
 {
     return 1;
 }

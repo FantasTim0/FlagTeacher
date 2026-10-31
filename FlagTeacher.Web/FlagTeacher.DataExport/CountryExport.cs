@@ -64,12 +64,7 @@ internal sealed class CountryExport(IConfiguration configuration)
         countries = countries.OrderBy(c => c.Name, german).ToList();
 
         Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(output))!);
-        await File.WriteAllTextAsync(output, JsonSerializer.Serialize(countries, new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            WriteIndented = true,
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-        }));
+        await File.WriteAllTextAsync(output, JsonSerializer.Serialize(countries, ExportedCountry.JsonOptions));
         Console.WriteLine($"Wrote {countries.Count} countries to {Path.GetFullPath(output)}");
         return true;
     }
@@ -98,4 +93,14 @@ internal sealed class CountryExport(IConfiguration configuration)
     private record RestFlag([property: JsonPropertyName("url_svg")] string? UrlSvg);
 }
 
-internal record ExportedCountry(string Code, string Name, string FlagUrl);
+/// <param name="SameFlag">Codes of the other countries with exactly this flag, added by <see cref="FlagExport"/>.</param>
+internal record ExportedCountry(string Code, string Name, string FlagUrl, List<string>? SameFlag = null)
+{
+    public static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+        WriteIndented = true,
+        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+    };
+}

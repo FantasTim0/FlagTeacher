@@ -111,12 +111,35 @@
 
     private bool CanGuess => SelectedCountry is not null && mapSelected is not null;
 
-    private string WrongMessage => (nameCorrect, mapCorrect) switch
+    private string WrongMessage
     {
-        (true, false) => $"Falsch! Das Land stimmt, aber auf der Karte hast du das falsche Land gewählt. Richtig ist das grün markierte Land ({current!.Name}).",
-        (false, true) => $"Falsch! Auf der Karte hast du das richtige Land gewählt, aber die Flagge gehört zu {current!.Name}.",
-        _ => $"Falsch! Das ist die Flagge von {current!.Name}.",
-    };
+        get
+        {
+            var owners = FlagOwners;
+            var names = owners.Count switch
+            {
+                1 => owners[0].Name,
+                _ => $"{string.Join(", ", owners.SkipLast(1).Select(c => c.Name))} oder {owners[^1].Name}",
+            };
+            return (nameCorrect, mapCorrect, owners.Count > 1) switch
+            {
+                (true, false, false) => $"Falsch! Das Land stimmt, aber auf der Karte hast du das falsche Land gewählt. Richtig ist das grün markierte Land ({names}).",
+                (true, false, true) => $"Falsch! Das Land stimmt, aber auf der Karte hast du ein falsches Land gewählt. Richtig sind die grün markierten Länder ({names}).",
+                (false, true, _) => $"Falsch! Auf der Karte hast du ein richtiges Land gewählt, aber die Flagge gehört zu {names}.",
+                _ => $"Falsch! Das ist die Flagge von {names}.",
+            };
+        }
+    }
+
+    // Every country with the current flag, any of which is a correct answer. The one the player answered
+    // with comes first, so the map zooms to it.
+    private List<Country> FlagOwners => countries
+        .Where(c => current!.SharesFlagWith(c.Code))
+        .DistinctBy(c => c.Code)
+        .OrderByDescending(c => c.Code == mapSelected)
+        .ThenByDescending(c => c == SelectedCountry)
+        .ThenByDescending(c => c == current)
+        .ToList();
 
     private Country? SelectedCountry =>
         countries.FirstOrDefault(c => string.Equals(c.Name, selectedName, StringComparison.OrdinalIgnoreCase));
@@ -252,8 +275,8 @@
             return;
         }
 
-        nameCorrect = guess == current;
-        mapCorrect = mapSelected == current.Code;
+        nameCorrect = current.SharesFlagWith(guess.Code);
+        mapCorrect = current.SharesFlagWith(mapSelected);
 
         await ScrollToFlagAsync();
 
@@ -262,7 +285,7 @@
             state = GameState.Correct;
             correctCount++;
             StateHasChanged();
-            await map.RevealAsync(current, PickedOnMap);
+            await map.RevealAsync(FlagOwners, PickedOnMap);
             await Task.Delay(TimeSpan.FromSeconds(2));
             await NextRoundAsync();
         }
@@ -272,7 +295,7 @@
             wrongCount++;
             focusContinue = true;
             StateHasChanged();
-            await map.RevealAsync(current, PickedOnMap, countries);
+            await map.RevealAsync(FlagOwners, PickedOnMap, countries);
         }
     }
 

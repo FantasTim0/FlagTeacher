@@ -42,14 +42,15 @@
     }
 
     /// <summary>
-    /// Locks the map, highlights the correct country and marks a wrong pick, both labeled with their names.
-    /// When <paramref name="allCountries"/> is given, every other country gets a plain name label too.
+    /// Locks the map, highlights the correct countries and marks a wrong pick, all labeled with their names.
+    /// The map zooms to the first correct country. When <paramref name="allCountries"/> is given, every other
+    /// country gets a plain name label too.
     /// </summary>
-    public async Task RevealAsync(Country correct, Country? picked, IEnumerable<Country>? allCountries = null)
+    public async Task RevealAsync(IReadOnlyList<Country> correct, Country? picked, IEnumerable<Country>? allCountries = null)
     {
         if (module is not null)
         {
-            await module.InvokeVoidAsync("reveal", correct.Code, picked?.Code, correct.Name, picked?.Name,
+            await module.InvokeVoidAsync("reveal", correct.Select(c => new[] { c.Code, c.Name }), picked?.Code, picked?.Name,
                 allCountries?.DistinctBy(c => c.Code).ToDictionary(c => c.Code, c => c.Name));
         }
     }

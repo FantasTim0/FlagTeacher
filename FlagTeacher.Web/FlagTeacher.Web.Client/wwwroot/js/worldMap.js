@@ -208,26 +208,32 @@ export function reset() {
     map.setView([20, 0], 2);
 }
 
-export function reveal(correct, picked, correctName, pickedName, names) {
+// `correct` lists [code, name] pairs: every country with the flag, as several can share one.
+export function reveal(correct, picked, pickedName, names) {
     locked = true;
     marks.clear();
-    if (picked && picked !== correct) {
-        marks.set(picked, "wrong");
+    correct = correct.filter(([code]) => layers.has(code));
+    const correctCodes = new Set(correct.map(([code]) => code));
+    const wrongPick = picked && !correctCodes.has(picked) ? picked : null;
+    if (wrongPick) {
+        marks.set(wrongPick, "wrong");
     }
-    marks.set(correct, "correct");
+    correctCodes.forEach((code) => marks.set(code, "correct"));
     layers.forEach((_, code) => restyle(code));
     clearLabels();
     for (const [code, name] of Object.entries(names ?? {})) {
-        if (code !== correct && code !== picked && layers.has(code)) {
+        if (!correctCodes.has(code) && code !== picked && layers.has(code)) {
             plainLabel(code, name);
         }
     }
-    label(correct, correctName, "correct");
-    if (picked && picked !== correct) {
-        label(picked, pickedName, "wrong");
+    correct.forEach(([code, name]) => label(code, name, "correct"));
+    if (wrongPick) {
+        label(wrongPick, pickedName, "wrong");
     }
     updatePlainLabels();
-    map.fitBounds(anchors.get(correct).bounds, { maxZoom: 5, padding: [20, 20] });
+    if (correct.length > 0) {
+        map.fitBounds(anchors.get(correct[0][0]).bounds, { maxZoom: 5, padding: [20, 20] });
+    }
 }
 
 export function destroy() {

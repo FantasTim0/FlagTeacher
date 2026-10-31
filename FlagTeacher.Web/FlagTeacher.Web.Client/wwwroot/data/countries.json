@@ -157,7 +157,11 @@
   {
     "code": "BV",
     "name": "Bouvetinsel",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/bv.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/bv.svg",
+    "sameFlag": [
+      "NO",
+      "SJ"
+    ]
   },
   {
     "code": "BR",
@@ -292,7 +296,10 @@
   {
     "code": "FR",
     "name": "Frankreich",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/fr.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/fr.svg",
+    "sameFlag": [
+      "MF"
+    ]
   },
   {
     "code": "GF",
@@ -532,7 +539,10 @@
   {
     "code": "UM",
     "name": "Kleinere Inselbesitzungen der Vereinigten Staaten",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/um.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/um.svg",
+    "sameFlag": [
+      "US"
+    ]
   },
   {
     "code": "CC",
@@ -807,7 +817,11 @@
   {
     "code": "NO",
     "name": "Norwegen",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/no.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/no.svg",
+    "sameFlag": [
+      "BV",
+      "SJ"
+    ]
   },
   {
     "code": "OM",
@@ -912,7 +926,10 @@
   {
     "code": "MF",
     "name": "Saint-Martin",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/mf.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/mf.svg",
+    "sameFlag": [
+      "FR"
+    ]
   },
   {
     "code": "SB",
@@ -1012,7 +1029,11 @@
   {
     "code": "SJ",
     "name": "Spitzbergen und Jan Mayen",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/sj.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/sj.svg",
+    "sameFlag": [
+      "BV",
+      "NO"
+    ]
   },
   {
     "code": "LK",
@@ -1207,7 +1228,10 @@
   {
     "code": "US",
     "name": "Vereinigte Staaten",
-    "flagUrl": "https://flags.restcountries.com/v5/svg/us.svg"
+    "flagUrl": "https://flags.restcountries.com/v5/svg/us.svg",
+    "sameFlag": [
+      "UM"
+    ]
   },
   {
     "code": "GB",

@@ -10,7 +10,7 @@ repositories.
 | Piece | What it does |
 | --- | --- |
 | `FlagTeacher.Web/FlagTeacher.Web.Client` | The app itself. `dotnet publish` turns it into plain static files. |
-| `FlagTeacher.Web/FlagTeacher.DataExport` | Writes the data the app loads: the country list from restcountries.com (this is where the API key is used) to `wwwroot/data/countries.json`, and the country outlines from Natural Earth to `wwwroot/data/country-shapes.geojson`. You run it on your machine; the results are committed. |
+| `FlagTeacher.Web/FlagTeacher.DataExport` | Writes the data the app loads: the country list from restcountries.com (this is where the API key is used) to `wwwroot/data/countries.json`, which countries share an identical flag, and the country outlines from Natural Earth to `wwwroot/data/country-shapes.geojson`. You run it on your machine; the results are committed. |
 | `.github/workflows/deploy.yml` | On every push to `main`: publishes the app, fixes the base path and deploys to Pages. |
 
 ## One-time setup
@@ -48,7 +48,7 @@ Countries rarely change, so the data is exported by hand and committed, not fetc
 # once: store your restcountries.com key (kept outside the repository)
 dotnet user-secrets set "RestCountries:ApiKey" "<key>" --project FlagTeacher.Web/FlagTeacher.DataExport
 
-# whenever you want fresh data: the country list, then the outlines that match it
+# whenever you want fresh data: the country list, the shared flags, then the matching outlines
 dotnet run --project FlagTeacher.Web/FlagTeacher.DataExport
 ```
 
@@ -58,6 +58,13 @@ instead be supplied through the `RestCountries__ApiKey` environment variable.
 
 Both files are public on the deployed site. They contain only country names, codes, flag URLs and
 outlines, never the key.
+
+### Shared flags
+
+A few territories fly the flag of their country: Svalbard and Jan Mayen and Bouvet Island use the flag of
+Norway, Saint-Martin that of France, and the US Minor Outlying Islands that of the United States. After
+writing the country list, the export downloads every flag in it and adds a `sameFlag` list to each country
+whose flag file is identical to another one. The game then accepts any of these countries as the answer.
 
 ### Country outlines
 
