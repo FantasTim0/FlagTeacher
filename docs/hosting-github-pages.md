@@ -11,6 +11,7 @@ repositories.
 | --- | --- |
 | `FlagTeacher.Web/FlagTeacher.Web.Client` | The app itself. `dotnet publish` turns it into plain static files. |
 | `FlagTeacher.Web/FlagTeacher.CountryExport` | Downloads the country list from restcountries.com (this is where the API key is used) and writes `wwwroot/data/countries.json`. You run it on your machine; the result is committed. |
+| `FlagTeacher.Web/FlagTeacher.ShapeExport` | Downloads the country outlines from Natural Earth and writes `wwwroot/data/country-shapes.geojson`, one outline per code in the country list. Also run by hand; the result is committed. |
 | `.github/workflows/deploy.yml` | On every push to `main`: publishes the app, fixes the base path and deploys to Pages. |
 
 ## One-time setup
@@ -56,6 +57,30 @@ This overwrites `FlagTeacher.Web/FlagTeacher.Web.Client/wwwroot/data/countries.j
 to redeploy. The key can instead be supplied through the `RestCountries__ApiKey` environment variable.
 
 The file is public on the deployed site. It contains only country names, codes and flag URLs, never the key.
+
+## Updating the country outlines
+
+The outlines come from [Natural Earth](https://www.naturalearthdata.com) (public domain). Run the export
+after the country list, because it gives every code in `countries.json` an outline of its own:
+
+```sh
+dotnet run --project FlagTeacher.Web/FlagTeacher.ShapeExport
+```
+
+This overwrites `FlagTeacher.Web/FlagTeacher.Web.Client/wwwroot/data/country-shapes.geojson`. No key is needed.
+
+- Most outlines come from the 50m countries layer, keyed by its `ISO_A2_EH` code (that is how Taiwan
+  gets `TW`).
+- Areas that restcountries lists separately but Natural Earth counts as part of a country (French
+  Guiana, Guadeloupe, Martinique, Mayotte, Réunion, the Caribbean Netherlands, Svalbard and Jan Mayen,
+  Tokelau, Cocos and Christmas Island) are cut out of that country using the 50m map units.
+- Codes that are still missing (Gibraltar, Bouvet Island, the US Minor Outlying Islands) come from the
+  more detailed 10m layers.
+
+The export prints every code it could not find. Those countries still show up in the list but never
+come up in the quiz. To download from a fixed Natural Earth release instead of `master`, set
+`NaturalEarth__BaseUrl`, for example to
+`https://raw.githubusercontent.com/nvkelso/natural-earth-vector/v5.1.2/geojson/`.
 
 ## Running locally
 
