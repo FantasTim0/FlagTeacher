@@ -38,23 +38,30 @@
 
     @if (loadError is null && current is not null)
     {
-        <div class="autocomplete">
-            <input class="picker" placeholder="Land auswählen …" autocomplete="off"
-                   disabled="@(state != GameState.Guessing)"
-                   value="@selectedName" @oninput="OnInput" @onkeydown="OnKeyDown"
-                   @onfocus="Open" @onblur="Close"
-                   @onkeydown:preventDefault="preventDefault" @ref="picker" />
-            @if (isOpen && Matches.Count > 0)
+        <div class="guess">
+            <div class="autocomplete">
+                <input class="picker" placeholder="Land auswählen …" autocomplete="off"
+                       disabled="@(state != GameState.Guessing)"
+                       value="@selectedName" @oninput="OnInput" @onkeydown="OnKeyDown"
+                       @onfocus="Open" @onblur="Close"
+                       @onkeydown:preventDefault="preventDefault" @ref="picker" />
+                @if (isOpen && Matches.Count > 0)
+                {
+                    <ul class="suggestions" role="listbox">
+                        @for (var i = 0; i < Matches.Count; i++)
+                        {
+                            var match = Matches[i];
+                            <li role="option" class="@(i == highlighted ? "active" : null)"
+                                @onmousedown="() => Choose(match)"
+                                @onmousedown:preventDefault>@match.Name</li>
+                        }
+                    </ul>
+                }
+            </div>
+            @if (state == GameState.Wrong && !nameCorrect && SelectedCountry is { } guessed)
             {
-                <ul class="suggestions" role="listbox">
-                    @for (var i = 0; i < Matches.Count; i++)
-                    {
-                        var match = Matches[i];
-                        <li role="option" class="@(i == highlighted ? "active" : null)"
-                            @onmousedown="() => Choose(match)"
-                            @onmousedown:preventDefault>@match.Name</li>
-                    }
-                </ul>
+                <img class="guessed-flag" src="@guessed.FlagUrl" alt="Flagge von @guessed.Name"
+                     title="Flagge von @guessed.Name" />
             }
         </div>
 

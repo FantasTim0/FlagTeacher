@@ -141,9 +141,25 @@ h1:focus {
 }
 
 
+.guess {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
 .autocomplete {
     position: relative;
-    width: 100%;
+    flex: 1;
+    min-width: 0;
+}
+
+/* The flag of a wrongly guessed country, next to the picker and as high as it. */
+.guessed-flag {
+    height: 2.4rem;
+    max-width: 4.5rem;
+    object-fit: contain;
+    border: 1px solid var(--border);
 }
 
 .suggestions {
