@@ -39,11 +39,11 @@
     @if (loadError is null && current is not null)
     {
         <div class="guess">
-            <div class="autocomplete">
+            <div class="autocomplete @(isOpen && Matches.Count > 0 ? "open" : null)">
                 <input class="picker" placeholder="Land auswählen …" autocomplete="off"
                        disabled="@(state != GameState.Guessing)"
                        value="@selectedName" @oninput="OnInput" @onkeydown="OnKeyDown"
-                       @onfocus="Open" @onblur="Close"
+                       @onfocus="Open" @onclick="OpenList" @onblur="Close"
                        @onkeydown:preventDefault="preventDefault" @ref="picker" />
                 @if (isOpen && Matches.Count > 0)
                 {
@@ -215,6 +215,9 @@
 
     private void Open() => isOpen = !string.IsNullOrWhiteSpace(selectedName);
 
+    // A tap or click shows the whole list even when nothing is typed yet; a phone has no arrow keys to open it.
+    private void OpenList() => isOpen = true;
+
     private void Close() => isOpen = false;
 
     private void Choose(Country country)
@@ -243,9 +246,13 @@
                 break;
             case "Enter" when isOpen && matches.Count > 0:
                 Choose(matches[Math.Min(highlighted, matches.Count - 1)]);
+                await CloseKeyboardAsync();
                 break;
             case "Enter" when CanGuess:
                 await GuessAsync();
+                break;
+            case "Enter":
+                await CloseKeyboardAsync();
                 break;
         }
     }
@@ -307,11 +314,14 @@
     }
 
     // On small screens the map is often scrolled into view while guessing, hiding the flag.
-    private async Task ScrollToFlagAsync()
-    {
+    private async Task ScrollToFlagAsync() =>
+        await (await PageModuleAsync()).InvokeVoidAsync("scrollToTopUnlessVisible", flag);
+
+    // On a phone the next step is the map, which the keyboard would cover.
+    private async Task CloseKeyboardAsync() => await (await PageModuleAsync()).InvokeVoidAsync("closeKeyboard");
+
+    private async Task<IJSObjectReference> PageModuleAsync() =>
         pageModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/page.js");
-        await pageModule.InvokeVoidAsync("scrollToTopUnlessVisible", flag);
-    }
 
     public async ValueTask DisposeAsync()
     {

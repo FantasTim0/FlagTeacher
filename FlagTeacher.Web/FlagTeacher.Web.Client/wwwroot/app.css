@@ -154,6 +154,29 @@ h1:focus {
     min-width: 0;
 }
 
+/* A chevron that marks the picker as a drop-down; it points up while the list is open. Taps go through to the
+   picker. */
+.autocomplete::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.9rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 2px solid var(--text-muted);
+    border-bottom: 2px solid var(--text-muted);
+    transform: translateY(-70%) rotate(45deg);
+    pointer-events: none;
+}
+
+.autocomplete.open::after {
+    transform: translateY(-30%) rotate(-135deg);
+}
+
+.autocomplete:has(.picker:disabled)::after {
+    opacity: 0.4;
+}
+
 /* The flag of a wrongly guessed country, next to the picker and as high as it. */
 .guessed-flag {
     height: 2.4rem;
@@ -251,6 +274,7 @@ h1:focus {
 }
 
 .picker {
+    padding-right: 2.25rem; /* room for the chevron */
     background: var(--surface);
     color: var(--text);
     border: 1px solid var(--border-strong);

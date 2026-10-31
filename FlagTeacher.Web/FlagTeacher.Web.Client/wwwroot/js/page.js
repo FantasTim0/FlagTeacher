@@ -15,6 +15,14 @@ export function scrollToTopUnlessVisible(element) {
     });
 }
 
+// Closes the on-screen keyboard by taking the focus off the picker. Without one (on a desktop) the focus
+// stays, so return can still submit the guess right away.
+export function closeKeyboard() {
+    if (isKeyboardOpen()) {
+        document.activeElement?.blur?.();
+    }
+}
+
 // The visual viewport shrinks by the height of the on-screen keyboard.
 function isKeyboardOpen() {
     return window.visualViewport !== undefined && window.visualViewport.height < window.innerHeight - 100;
