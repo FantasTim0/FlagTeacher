@@ -1,7 +1,10 @@
 @page "/"
 @using FlagTeacher.Web.Client.Components
 @using FlagTeacher.Web.Client.Models
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
 @inject HttpClient Http
+@inject IJSRuntime JS
 
 <PageTitle>Flag Teacher</PageTitle>
 
@@ -26,12 +29,7 @@
         }
         else
         {
-            <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" />
-        }
-
-        @if (countries.Count > 0)
-        {
-            <WorldMap @ref="map" Loaded="OnShapesLoaded" SelectionChanged="OnMapSelected" />
+            <img class="flag" src="@current.FlagUrl" alt="Flagge eines unbekannten Landes" @ref="flag" />
         }
     }
 
@@ -57,19 +55,25 @@
             }
         </div>
 
-        @if (state == GameState.Guessing)
-        {
-            <button class="action" disabled="@(!CanGuess)" @onclick="GuessAsync">Raten</button>
-        }
-        else if (state == GameState.Correct)
+        @if (state == GameState.Correct)
         {
             <p class="message correct">Richtig!</p>
         }
-        else
+        else if (state == GameState.Wrong)
         {
             <p class="message wrong">@WrongMessage</p>
             <button class="action" @onclick="NextRoundAsync" @ref="continueButton">Weiter</button>
         }
+    }
+
+    @if (loadError is null && countries.Count > 0)
+    {
+        <WorldMap @ref="map" Loaded="OnShapesLoaded" SelectionChanged="OnMapSelected" />
+    }
+
+    @if (loadError is null && current is not null && state == GameState.Guessing)
+    {
+        <button class="action" disabled="@(!CanGuess)" @onclick="GuessAsync">Raten</button>
     }
 </main>
 
@@ -83,6 +87,8 @@
     private string? loadError;
     private ElementReference picker;
     private ElementReference continueButton;
+    private ElementReference flag;
+    private IJSObjectReference? pageModule;
     private bool focusPicker;
     private bool focusContinue;
     private bool isOpen;
@@ -148,7 +154,8 @@
             // Let the Enter key press that submitted the guess finish first; otherwise its
             // keypress lands on the freshly focused button and clicks it immediately.
             await Task.Delay(150);
-            await continueButton.FocusAsync();
+            // Don't let the focus undo the scroll back to the flag.
+            await continueButton.FocusAsync(preventScroll: true);
         }
     }
 
@@ -244,6 +251,8 @@
         nameCorrect = guess == current;
         mapCorrect = mapSelected == current.Code;
 
+        await ScrollToFlagAsync();
+
         if (nameCorrect && mapCorrect)
         {
             state = GameState.Correct;
@@ -260,6 +269,27 @@
             focusContinue = true;
             StateHasChanged();
             await map.RevealAsync(current, PickedOnMap, countries);
+        }
+    }
+
+    // On small screens the map is often scrolled into view while guessing, hiding the flag.
+    private async Task ScrollToFlagAsync()
+    {
+        pageModule ??= await JS.InvokeAsync<IJSObjectReference>("import", "./js/page.js");
+        await pageModule.InvokeVoidAsync("scrollToTopUnlessVisible", flag);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (pageModule is not null)
+        {
+            try
+            {
+                await pageModule.DisposeAsync();
+            }
+            catch (JSDisconnectedException)
+            {
+            }
         }
     }
 }
